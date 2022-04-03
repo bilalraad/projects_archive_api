@@ -62,9 +62,10 @@ class ProjectController extends Controller
             'supervisor_name' => ['required', "max:255", 'bail'],
             'graduation_year' => ['required', 'date', 'bail'],
             'level' =>  ['required', 'bail'],
+            'pdf_url' => ['required', 'bail'],
+            'doc_url' => ['required', 'bail'],
             'key_words' => ['nullable', 'bail'],
             'abstract' => ['nullable', 'bail'],
-
         ]);
 
         $project = tap(new Project($data))->save();

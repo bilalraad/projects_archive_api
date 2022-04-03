@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MultipleUploadController;
+
 
 
 
@@ -28,3 +30,4 @@ Route::post('users/create', [UserController::class, 'create']);
 
 
 Route::apiResource('projects', ProjectController::class);
+Route::post('upload-files', [MultipleUploadController::class, 'store']);
