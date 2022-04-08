@@ -3,6 +3,7 @@
 use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 // Route::get('/projects', function () {
 //     // get all the student projects from the database with pagination and return it as response
 //     return Project::all();

@@ -81,8 +81,6 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-
-        // $p = Project::where('id', $id)->cursor()->first();
         return Project::findOrFail($id);
     }
 

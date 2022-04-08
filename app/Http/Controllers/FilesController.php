@@ -4,49 +4,58 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\File;
+use Illuminate\Support\Facades\Storage;
 
-class MultipleUploadController extends Controller
+
+class FilesController extends Controller
 {
     public function store(Request $request)
     {
-
-
         $data = $request->validate([
-            'files' => 'required|mimes:doc,docx,pdf,vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'files' => 'required',
+            'files.*' => 'mimes:doc,docx,pdf,vnd.openxmlformats-officedocument.wordprocessingml.document',
             'project_id' => 'required',
-
         ]);
-        // if ($validator->fails()) {
-        //     return response()->json(['error' => $validator->errors()], 401);
-        // }
 
-        dd($request->file('files'));
+        $files = $data['files'];
 
-        // if ($files = $data['files']) {
-        $paths = [];
-        foreach ($request->files('files') as
-            $key => $file) {
-            dd($file);
-            $path = $file->store('public/files');
+
+        $urls = [];
+        foreach ($files as $file) {
+            $path = Storage::putFile('files/' . $data["project_id"], $file);
             $name = $file->getClientOriginalName();
-            $paths[$key] = $name;
-
-            //store your file into directory and db
             $save = new File();
             $save->title = $name;
             $save->path = $path;
             $save->project_id = $data["project_id"];
+            $urls[] = [
+                'file_name' => $name,
+                'url' => url('api/' .  $path)
+            ];
 
             $save->save();
-        }
+        };
         return response()->json([
             "success" => true,
             "message" => "Files successfully uploaded",
-            "file" => $paths,
+            "urls" => $urls
+
         ]);
-        // }
     }
 
+
+    public function show($id)
+    {
+        return File::select('*')->where(function ($q) use ($id) {
+            $q->where('project_id', '=',  $id);
+        })->get();
+    }
+
+
+    public function download($id, $filename)
+    {
+        return Storage::download('files/' . $id . '/' . $filename);
+    }
     /**
      * Get the error messages for the defined validation rules.
      *

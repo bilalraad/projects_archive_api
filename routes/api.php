@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\MultipleUploadController;
+use App\Http\Controllers\FilesController;
 
 
 
@@ -28,6 +28,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('users/login', [UserController::class, 'login']);
 Route::post('users/create', [UserController::class, 'create']);
 
-
+Route::get('/files/{id}/{filename}', [FilesController::class, 'download']);
 Route::apiResource('projects', ProjectController::class);
-Route::post('upload-files', [MultipleUploadController::class, 'store']);
+Route::apiResource('files', FilesController::class);
