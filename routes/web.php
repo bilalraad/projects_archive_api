@@ -15,15 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Route::get('/projects', function () {
-//     // get all the student projects from the database with pagination and return it as response
-//     return Project::all();
+// Route::get('/', function () {
+//     return view('welcome');
 // });
-
-// Route::get('/projects/{id}', function ($id) {
-//     // find a project with the specific id
-// })->whereNumber("id");
