@@ -12,7 +12,7 @@ class FilesController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'files' => 'required',
+            'files' => ["required", "array", "max:2"],
             'files.*' => 'mimes:doc,docx,pdf,vnd.openxmlformats-officedocument.wordprocessingml.document',
             'project_id' => 'required',
         ]);
