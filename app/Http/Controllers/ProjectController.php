@@ -19,9 +19,7 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $count = Project::all()->count();
-
-        $projects = Project::select('*')->where(function ($q) use ($request) {
+        $projects = Project::with("files")->select('*')->where(function ($q) use ($request) {
             if ($request->has('year'))
                 $q->whereYear('graduation_year', $request->year);
             if ($request->has('name'))
@@ -41,7 +39,7 @@ class ProjectController extends Controller
             ->limit($request->take)
             ->get();
         return [
-            'count' => $count,
+            'count' => count($projects),
             'results' => $projects,
         ];
     }
@@ -62,8 +60,6 @@ class ProjectController extends Controller
             'supervisor_name' => ['required', "max:255", 'bail'],
             'graduation_year' => ['required', 'date', 'bail'],
             'level' =>  ['required', 'bail'],
-            'pdf_url' => ['required', 'bail'],
-            'doc_url' => ['required', 'bail'],
             'key_words' => ['nullable', 'bail'],
             'abstract' => ['nullable', 'bail'],
         ]);
@@ -81,7 +77,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return Project::findOrFail($id);
+        return Project::findOrFail($id)->with("files")->first();
     }
 
 
@@ -102,8 +98,6 @@ class ProjectController extends Controller
             'student_phone_no' => ['digits:11'],
             'supervisor_name' => ["max:255"],
             'graduation_year' => ['date'],
-            'doc_url' => ['url'],
-            'pdf_url' => ["url"],
             'abstract' => ['nullable'],
             'key_words' => ['nullable'],
 
@@ -140,8 +134,6 @@ class ProjectController extends Controller
             'student_name.required' => 'A student_name is required',
             'graduation_year.required' => 'A graduation_year is required',
             'graduation_year.required' => 'A graduation_year is required',
-            'doc_url.required' => 'A doc_url is required',
-            'pdf_url.required' => 'A pdf_url is required',
         ];
     }
 }

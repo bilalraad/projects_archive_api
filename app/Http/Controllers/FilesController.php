@@ -18,9 +18,6 @@ class FilesController extends Controller
         ]);
 
         $files = $data['files'];
-
-
-        $urls = [];
         foreach ($files as $file) {
             $path = Storage::putFile('files/' . $data["project_id"], $file);
             $name = $file->getClientOriginalName();
@@ -28,18 +25,11 @@ class FilesController extends Controller
             $save->title = $name;
             $save->path = $path;
             $save->project_id = $data["project_id"];
-            $urls[] = [
-                'file_name' => $name,
-                'url' => url('api/' .  $path)
-            ];
 
             $save->save();
         };
         return response()->json([
-            "success" => true,
-            "message" => "Files successfully uploaded",
-            "urls" => $urls
-
+            "message" => "تم رفع الملفات بنجاح",
         ]);
     }
 
@@ -47,14 +37,15 @@ class FilesController extends Controller
     public function show($id)
     {
         return File::select('*')->where(function ($q) use ($id) {
-            $q->where('project_id', '=',  $id);
+            // $q->where('project_id', '=',  $id);
         })->get();
     }
 
 
     public function download($id, $filename)
     {
-        return Storage::download('files/' . $id . '/' . $filename);
+        $file = File::where('path', 'like', 'files/' . $id . '/' . $filename)->first();
+        return Storage::download('files/' . $id . '/' . $filename, $file->title);
     }
     /**
      * Get the error messages for the defined validation rules.

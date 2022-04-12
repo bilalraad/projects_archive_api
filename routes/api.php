@@ -25,9 +25,16 @@ use App\Http\Controllers\FilesController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::post('users/login', [UserController::class, 'login']);
 Route::post('users/create', [UserController::class, 'create']);
 
 Route::get('/files/{id}/{filename}', [FilesController::class, 'download']);
 Route::apiResource('projects', ProjectController::class);
 Route::apiResource('files', FilesController::class);
+
+// Route::group(['middleware' => 'auth:sanctum'], function () {
+    //All the routes that belongs to the group goes here
+//     Route::get('dashboard', function () {
+//     });
+// });

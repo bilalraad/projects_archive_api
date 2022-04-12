@@ -23,8 +23,6 @@ class CreateProjectsTable extends Migration
             $table->string('supervisor_name');
             $table->date('graduation_year');
             $table->text('abstract')->nullable();
-            $table->string('pdf_url');
-            $table->string('doc_url');
             $table->json('key_words')->nullable();
             $table->enum('level', ['master', 'bachelor', "phD"]);
         });

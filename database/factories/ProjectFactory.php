@@ -22,8 +22,6 @@ class ProjectFactory extends Factory
             'graduation_year' => $this->faker->date(),
             'abstract' => $this->faker->paragraph(),
             'level' => $this->faker->randomElement(['master', 'bachelor', "phD"]),
-            'doc_url' => $this->faker->imageUrl(640, 480, 'cats'),
-            'pdf_url' => $this->faker->imageUrl(640, 480, 'cats'),
             'key_words' => $this->faker->randomElements(['x', 'y', 'z'], 2, true),
         ];
     }
