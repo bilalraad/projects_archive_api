@@ -12,11 +12,10 @@ class FilesController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'files' => ["required", "array", "max:2"],
+            'files' => ["required", "array", "max:3"],
             'files.*' => 'mimes:doc,docx,pdf,vnd.openxmlformats-officedocument.wordprocessingml.document',
             'project_id' => 'required',
         ]);
-
         $files = $data['files'];
         foreach ($files as $file) {
             $path = Storage::putFile('files/' . $data["project_id"], $file);
@@ -37,7 +36,7 @@ class FilesController extends Controller
     public function show($id)
     {
         return File::select('*')->where(function ($q) use ($id) {
-            // $q->where('project_id', '=',  $id);
+            $q->where('project_id', '=',  $id);
         })->get();
     }
 
