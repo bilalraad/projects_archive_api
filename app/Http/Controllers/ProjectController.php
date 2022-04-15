@@ -55,12 +55,12 @@ class ProjectController extends Controller
         $data = $request->validate([
             'name' => ["required", 'max:255', 'bail'],
             'student_name' => ['required', 'max:255', 'bail'],
-            'student_phone_no' => ['required', 'digits:11', 'bail'],
+            'student_phone_no' => ['digits:11', 'bail'],
             'student_email' => ['email', 'bail'],
             'supervisor_name' => ['required', "max:255", 'bail'],
             'graduation_year' => ['required', 'date', 'bail'],
             'level' =>  ['required', 'bail'],
-            'key_words' => ['nullable', 'bail'],
+            'key_words' => ['nullable', 'array', 'bail'],
             'abstract' => ['nullable', 'bail'],
         ]);
 
@@ -116,7 +116,7 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         Project::destroy($id);
-        return response('Project successfully deleted', 200);
+        return response('تم حذف المشروع بنجاح', 200);
     }
 
 
@@ -130,10 +130,16 @@ class ProjectController extends Controller
     public function messages()
     {
         return [
-            'name.required' => 'A name is required',
-            'student_name.required' => 'A student_name is required',
-            'graduation_year.required' => 'A graduation_year is required',
-            'graduation_year.required' => 'A graduation_year is required',
+            'name.required' => 'الاسم مطلوب',
+            'name.max' => 'يجب ان يكون الاسم اقصر من ٢٥٥ حرف',
+            'student_name.required' => 'سجب ادخال اسم الطالب',
+            'student_name.max' => 'يجب اني يكون اسم الطالب اقصر من ٢٥٥ حرف',
+            'student_phone_no.digits' => 'يجب ان يكون رقم الهاتف مكون من ١١ رقم',
+            'student_email.email' => 'البريد الالكتروني الخاص بالطالب غير صالح',
+            'supervisor_name.required' => 'يجب ادخال اسم المشرف',
+            'supervisor_name.max' => 'يجب ان يكون اسم المشرف اقل من ٢٥٥ حرف',
+            'graduation_year.required' => 'سنة التخرج مطلوبة',
+            'level.required' => 'يجب اختيار المستوى الجامعي',
         ];
     }
 }

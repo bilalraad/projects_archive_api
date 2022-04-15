@@ -19,14 +19,13 @@ class UserController extends Controller
         $user = User::where('email', $request->input('email'))->first();
 
         if (!$user || !Hash::check($request->input('password'), $user->password)) {
-            return response()->json([
-                'error' => 'The provided credentials are incorrect.'
-            ]);
+            return response('كلمة السر او البريد الالكتروني غير صالح', 401);
         }
         $user->tokens()->delete();
         $token = $user->createToken($request->input('email'))->plainTextToken;
 
         return response()->json([
+            'user' => $user,
             'access_token' => $token,
             'token_type' => 'Bearer'
         ]);
@@ -51,5 +50,20 @@ class UserController extends Controller
             'access_token' => $token,
             'token_type' => 'Bearer'
         ]);
+    }
+
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'email.required' => 'يجب ادخال البريد الالكتروني',
+            'email.email' => 'البريد الالكتروني غير صالح',
+            'password.required' => 'كلمة السر مطلوبة',
+        ];
     }
 }

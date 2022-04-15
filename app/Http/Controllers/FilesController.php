@@ -54,10 +54,8 @@ class FilesController extends Controller
     public function messages()
     {
         return [
-            'files.required' => 'Please add files',
-            'project_id.required' => 'A project_id is required',
-            'project_id.mimes' => 'A project_id is required',
-
+            'files.required' => 'يجب اختيار ملفات',
+            'files.mimes' => 'يجب اختيار ملفات بصيغ pdf او word فقط',
         ];
     }
 }
