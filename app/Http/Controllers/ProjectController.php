@@ -52,17 +52,10 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => ["required", 'max:255', 'bail'],
-            'student_name' => ['required', 'max:255', 'bail'],
-            'student_phone_no' => ['digits:11', 'bail'],
-            'student_email' => ['email', 'bail'],
-            'supervisor_name' => ['required', "max:255", 'bail'],
-            'graduation_year' => ['required', 'date', 'bail'],
-            'level' =>  ['required', 'bail'],
-            'key_words' => ['nullable', 'array', 'bail'],
-            'abstract' => ['nullable', 'bail'],
-        ]);
+        $data = $request->validate(
+            Project::StoreRules(),
+            Project::$messages
+        );
 
         $project = tap(new Project($data))->save();
 
@@ -92,16 +85,10 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
 
-        $data = $request->validate([
-            'name' => ['max:255'],
-            'student_name' => ['max:255'],
-            'student_phone_no' => ['digits:11'],
-            'supervisor_name' => ["max:255"],
-            'graduation_year' => ['date'],
-            'abstract' => ['nullable'],
-            'key_words' => ['nullable'],
-
-        ]);
+        $data = $request->validate(
+            Project::UpdateRules(),
+            Project::$messages
+        );
         $project->update($data);
         $project->save();
         return $project;
