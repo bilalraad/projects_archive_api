@@ -20,8 +20,8 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $projects = Project::with("files")->select('*')->where(function ($q) use ($request) {
-            if ($request->has('year'))
-                $q->whereYear('graduation_year', $request->year);
+            if ($request->has('graduation_year'))
+                $q->whereYear('graduation_year', $request->graduation_year);
             if ($request->has('name'))
                 $q->where('name', 'like',  "%$request->name%");
             if ($request->has('student_name'))
@@ -70,7 +70,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return Project::findOrFail($id)->with("files")->first();
+        $p = Project::where('id', $id)->with("files")->first();
+        if (is_null($p))
+            return response('المشروع محذوف او غير موجود', 404);
+        return Project::where('id', $id)->with("files")->first();
     }
 
 
