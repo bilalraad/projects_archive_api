@@ -36,7 +36,7 @@ class FilesController extends Controller
     public function show($id)
     {
         return File::select('*')->where(function ($q) use ($id) {
-            $q->where('project_id', '=',  $id);
+            // $q->where('project_id', '=',  $id);
         })->get();
     }
 

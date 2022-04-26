@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 // use Illuminate\Validation\Rule;
 
 use App\Models\Project;
+use Illuminate\Support\Facades\Storage;
+
 
 // use app\utils\Validations;
 
@@ -94,6 +96,7 @@ class ProjectController extends Controller
         );
         $project->update($data);
         $project->save();
+
         return $project;
     }
 
@@ -106,6 +109,11 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         Project::destroy($id);
+        // Get all files in a directory
+        $files =   Storage::allFiles('files/' . $id);
+
+        // Delete Files
+        Storage::delete($files);
         return response('تم حذف المشروع بنجاح', 200);
     }
 

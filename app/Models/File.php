@@ -15,6 +15,16 @@ class File extends Model
     }
 
     /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        // static::deleted(function ($file) {});
+    }
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array
