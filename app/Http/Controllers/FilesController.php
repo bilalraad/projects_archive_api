@@ -46,6 +46,16 @@ class FilesController extends Controller
         $file = File::where('path', 'like', 'files/' . $id . '/' . $filename)->first();
         return Storage::download('files/' . $id . '/' . $filename, $file->title);
     }
+
+    public function removeFile($id, $filename)
+    {
+        $file = File::where('path', 'like', 'files/' . $id . '/' . $filename)->first();
+        if (is_null($file))
+            return response('الملف محذوف او غير موجود', 404);
+        $file->delete();
+        Storage::delete('files/' . $id . '/' . $filename, $file->title);
+        return response('تم حذف الملف بنجاح', 200);
+    }
     /**
      * Get the error messages for the defined validation rules.
      *

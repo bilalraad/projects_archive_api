@@ -30,6 +30,7 @@ Route::post('users/login', [UserController::class, 'login']);
 Route::post('users/create', [UserController::class, 'create']);
 
 Route::get('/files/{id}/{filename}', [FilesController::class, 'download']);
+Route::delete('/files/{id}/{filename}', [FilesController::class, 'removeFile']);
 Route::apiResource('projects', ProjectController::class);
 Route::apiResource('files', FilesController::class);
 
