@@ -31,11 +31,8 @@ Route::post('users/create', [UserController::class, 'create']);
 
 Route::get('/files/{id}/{filename}', [FilesController::class, 'download']);
 Route::delete('/files/{id}/{filename}', [FilesController::class, 'removeFile']);
-Route::apiResource('projects', ProjectController::class);
 Route::apiResource('files', FilesController::class);
 
+Route::apiResource('projects', ProjectController::class);
 // Route::group(['middleware' => 'auth:sanctum'], function () {
-    //All the routes that belongs to the group goes here
-//     Route::get('dashboard', function () {
-//     });
 // });

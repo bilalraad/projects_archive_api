@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
+
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')
+            ->only(['destroy', 'store', 'update']);
+    }
     /**
      * Display a listing of the resource.
      *

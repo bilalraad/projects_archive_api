@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Storage;
 
 class FilesController extends Controller
 {
+
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')
+            ->only(['removeFile', 'store', 'update']);
+    }
     public function store(Request $request)
     {
         $data = $request->validate([
