@@ -28,11 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('users/login', [UserController::class, 'login']);
 Route::post('users/create', [UserController::class, 'create']);
-
 Route::get('/files/{id}/{filename}', [FilesController::class, 'download']);
 Route::delete('/files/{id}/{filename}', [FilesController::class, 'removeFile']);
 Route::apiResource('files', FilesController::class);
-
 Route::apiResource('projects', ProjectController::class);
-// Route::group(['middleware' => 'auth:sanctum'], function () {
-// });

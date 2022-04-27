@@ -5,10 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
+
 
 
 class UserController extends Controller
 {
+
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')
+            ->only(['destroy', 'create', 'update']);
+    }
+
+
     public function login(Request $request)
     {
         $request->validate([
@@ -36,7 +51,12 @@ class UserController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+            'role' => 'required'
         ]);
+
+        if (!Gate::allows('create-user')) {
+            return response('انت غير مخول لانشاء ادمن جديد', 403);
+        }
 
         $user = User::create([
             'name' => $request->name,
