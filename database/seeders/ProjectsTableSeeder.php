@@ -13,6 +13,6 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Project::factory(10)->create();
+        \App\Models\Project::factory(200)->create();
     }
 }

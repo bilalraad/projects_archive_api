@@ -47,13 +47,15 @@ class ProjectController extends Controller
                 $q->where('abstract', 'like', "%$request->abstract%");
             if ($request->has('supervisor_name'))
                 $q->where('supervisor_name', 'like',  "%$request->supervisor_name%");
-        })
-            ->offset($request->skip)
+        });
+        $count = $projects->count();
+        $withPaging = $projects->offset($request->skip)
             ->limit($request->take)
             ->get();
+
         return [
-            'count' => count($projects),
-            'results' => $projects,
+            'count' => $count,
+            'results' => $withPaging,
         ];
     }
 
@@ -86,7 +88,7 @@ class ProjectController extends Controller
         $p = Project::where('id', $id)->with("files")->first();
         if (is_null($p))
             return response('المشروع محذوف او غير موجود', 404);
-        return Project::where('id', $id)->with("files")->first();
+        return $p;
     }
 
 

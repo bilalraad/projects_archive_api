@@ -13,9 +13,7 @@ class Project extends Model
         'key_words' => 'array',
     ];
 
-    /**
-     * Get the comments for the discussions post.
-     */
+
     public function files()
     {
         return $this->hasMany(File::class);
