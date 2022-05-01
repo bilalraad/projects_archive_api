@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Project;
 use Illuminate\Support\Facades\Storage;
-
-
-// use app\utils\Validations;
+use App\Exports\ProjectsExports;
 
 
 class ProjectController extends Controller
@@ -128,6 +126,11 @@ class ProjectController extends Controller
         // Delete Files
         Storage::delete($files);
         return response('تم حذف المشروع بنجاح', 200);
+    }
+
+    public function export(Request $request)
+    {
+        return (new ProjectsExports($request))->download('projects.xlsx');
     }
 
 
