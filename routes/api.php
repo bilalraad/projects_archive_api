@@ -32,4 +32,5 @@ Route::get('/files/{id}/{filename}', [FilesController::class, 'download']);
 Route::delete('/files/{id}/{filename}', [FilesController::class, 'removeFile']);
 Route::apiResource('files', FilesController::class);
 Route::get('projects/export', [ProjectController::class, 'export']);
+Route::post('projects/import', [ProjectController::class, 'import']);
 Route::apiResource('projects', ProjectController::class);

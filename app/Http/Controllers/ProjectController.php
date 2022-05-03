@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 use App\Models\Project;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\ProjectsExports;
+use App\Imports\ProjectsImport;
+
 
 
 class ProjectController extends Controller
@@ -21,7 +24,7 @@ class ProjectController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum')
-            ->only(['destroy', 'store', 'update']);
+            ->only(['destroy', 'store', 'update', 'import']);
     }
     /**
      * Display a listing of the resource.
@@ -133,8 +136,16 @@ class ProjectController extends Controller
         return (new ProjectsExports($request))->download('projects.xlsx');
     }
 
+    public function import(Request $request)
+    {
+        $data = $request->validate([
+            'file' => ["required"],
+            'file.*' => 'mimes:xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);
+        Excel::import(new ProjectsImport, $data['file']);
 
-
+        return response('تم رفع المشاريع بنجاح');
+    }
 
     /**
      * Get the error messages for the defined validation rules.

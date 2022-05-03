@@ -34,7 +34,7 @@ class UserController extends Controller
         $user = User::where('email', $request->input('email'))->first();
 
         if (!$user || !Hash::check($request->input('password'), $user->password)) {
-            return response('كلمة السر او البريد الالكتروني غير صالح', 401);
+            return response('كلمة السر او البريد الالكتروني غير صحيح', 401);
         }
         $user->tokens()->delete();
         $token = $user->createToken($request->input('email'))->plainTextToken;
@@ -53,7 +53,10 @@ class UserController extends Controller
             'password' => 'required',
             'role' => 'required'
         ]);
-
+        $users = User::where('email', '=', $request->input('email'))->first();
+        if ($users !== null) {
+            return response('البريد الالكتروني مأخوذ سابقا', 409);
+        }
         if (!Gate::allows('create-user')) {
             return response('انت غير مخول لانشاء ادمن جديد', 403);
         }
