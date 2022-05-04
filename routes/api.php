@@ -5,10 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FilesController;
-
-
-
-
+use App\Http\Controllers\BackupController;
 
 
 /*
@@ -34,3 +31,12 @@ Route::apiResource('files', FilesController::class);
 Route::get('projects/export', [ProjectController::class, 'export']);
 Route::post('projects/import', [ProjectController::class, 'import']);
 Route::apiResource('projects', ProjectController::class);
+
+
+
+Route::get('/backups', [BackupController::class, 'index']);
+Route::post('/backups', [BackupController::class, 'store']);
+Route::get('/backups/download/database/{key}', [BackupController::class, 'downloadDatabase']);
+Route::get('/backups/download/storage/{key}', [BackupController::class, 'downloadStorage']);
+Route::post('/backups/restore', [BackupController::class, 'restore']);
+Route::delete('/backups/destroy', [BackupController::class, 'destroy']);
