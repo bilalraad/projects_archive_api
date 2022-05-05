@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\AuthenticationException;
+
 
 
 class Handler extends ExceptionHandler
@@ -26,6 +28,15 @@ class Handler extends ExceptionHandler
             'errors'  => $this->transformErrors($exception),
 
         ], $exception->status);
+    }
+
+
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response('الرجاء تسجيل الدخول اولا', 401);
+        }
     }
 
     // transform the error messages,
