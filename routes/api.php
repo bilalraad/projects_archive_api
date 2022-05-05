@@ -19,12 +19,16 @@ use App\Http\Controllers\BackupController;
 |
 */
 
+//Users
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::post('users/login', [UserController::class, 'login']);
 Route::post('users/create', [UserController::class, 'create']);
+Route::post('users/forgot-password', [UserController::class, 'forgotPassword']);
+Route::post('users/reset-password', [UserController::class, 'resetPassword']);
+
+// Projects Archive
 Route::get('/files/{id}/{filename}', [FilesController::class, 'download']);
 Route::delete('/files/{id}/{filename}', [FilesController::class, 'removeFile']);
 Route::apiResource('files', FilesController::class);
@@ -33,7 +37,7 @@ Route::post('projects/import', [ProjectController::class, 'import']);
 Route::apiResource('projects', ProjectController::class);
 
 
-
+//backup & restore
 Route::get('/backups', [BackupController::class, 'index']);
 Route::post('/backups', [BackupController::class, 'store']);
 Route::get('/backups/download/database/{key}', [BackupController::class, 'downloadDatabase']);
