@@ -12,7 +12,7 @@ class BackupController extends Controller
 
     public function __construct(Backup $backup)
     {
-        $this->middleware('auth:sanctum');
+        $this->middleware('auth:sanctum')->except(['downloadDatabase', 'downloadStorage']);
         $this->backup = $backup;
     }
 
@@ -22,11 +22,24 @@ class BackupController extends Controller
     public function index()
     {
         $backups = $this->backup->getBackupList();
-
+        $data = array();
         foreach ($backups as $key => $backup) {
+
             $backups[$key]['size'] = $this->backup->sizeFormat(Backup::folderSize(base_path('backups') . DIRECTORY_SEPARATOR . $key));
+            array_push($data, [
+                'key' => $key,
+                'size' => $backups[$key]['size'],
+                'name' => $backup['name'],
+                'date' => $backup['date'],
+            ]);
         }
-        return response($backups);
+
+        return response([
+            'count' => count($data),
+            'results' => $data,
+
+
+        ]);
     }
 
     /**
@@ -74,7 +87,7 @@ class BackupController extends Controller
     }
 
     /**
-     * restore the backup (must provide key or the actual file)
+     * restore the backup (must provide key or the actual zip file)
      * must provide the key(backup date) in this form  2022-05-04-11-11-07
      */
     public function restore(Request $request)
@@ -104,7 +117,7 @@ class BackupController extends Controller
                     $this->backup->restore($data['file'], base_path('storage/app'));
                 }
             }
-            return response('تم استرجاع النسخة بنجاح');
+            // return response('تم استرجاع النسخة بنجاح');
         } catch (Exception $ex) {
             return response($ex->getMessage(), 500);
         }

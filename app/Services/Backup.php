@@ -56,7 +56,6 @@ class Backup
 
     public function restoreDb($file, $path)
     {
-        dd($path);
         $this->restore($file, $path); //extract file
         $file = $path . DIRECTORY_SEPARATOR . File::name($file) . '.sql';
 
@@ -76,7 +75,8 @@ class Backup
     {
         $path = base_path('backups/temp');
         $this->restore($file, $path); //extract file
-        $file = $path . DIRECTORY_SEPARATOR . File::name($file) . '.sql';
+        $fileName = str_replace(".zip", "", $file->getClientOriginalName());
+        $file = $path . DIRECTORY_SEPARATOR . $fileName . '.sql';
         if (!file_exists($file)) {
             return false;
         }
