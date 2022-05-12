@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Student;
+use App\Models\Graduate;
 use App\Models\Teacher;
 
 
 
-class StudentsAndTeachersController extends Controller
+class GraduatesAndTeachersController extends Controller
 {
     /**
      * Create the controller instance.
@@ -28,31 +28,30 @@ class StudentsAndTeachersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function students(Request $request)
+    public function graduates(Request $request)
     {
-        $students = Student::select('*')->where(function ($q) use ($request) {
+        $graduates = Graduate::select('*')->where(function ($q) use ($request) {
             if ($request->has('level'))
                 $q->where('level', '=', $request->level);
         });
-        $maxYear = $students->max('year_number');
 
-        $count = $students->count();
-        $students = $students->where('year_number', '=', $maxYear)->get();
+        $count = $graduates->count();
+        $graduates = $graduates->get();
 
         return [
             'count' => $count,
-            'results' => $students,
+            'results' => $graduates,
         ];
     }
     public function teachers()
     {
         $teachers = Teacher::select('*');
         $count = $teachers->count();
-        $students = $teachers->get();
+        $teachers = $teachers->get();
 
         return [
             'count' => $count,
-            'results' => $students,
+            'results' => $teachers,
         ];
     }
 }

@@ -6,7 +6,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FilesController;
 use App\Http\Controllers\BackupController;
-use App\Http\Controllers\StudentsAndTeachersController;
+use App\Http\Controllers\GraduatesAndTeachersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +46,6 @@ Route::post('/backups/restore', [BackupController::class, 'restore']);
 Route::delete('/backups/destroy', [BackupController::class, 'destroy']);
 
 
-//teacher and students
-Route::get('/teachers', [StudentsAndTeachersController::class, 'teachers']);
-Route::get('/students', [StudentsAndTeachersController::class, 'students']);
+//teacher and graduates
+Route::get('/teachers', [GraduatesAndTeachersController::class, 'teachers']);
+Route::get('/graduates', [GraduatesAndTeachersController::class, 'graduates']);
