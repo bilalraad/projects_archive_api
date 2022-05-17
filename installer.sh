@@ -12,7 +12,7 @@ sudo mv composer.phar /usr/local/bin/composer
 
 
 # Install Composer Dependency
-composer install
+/usr/local/bin/composer install
 
 # Copy .env.example to .env
 cp .env.example .env
