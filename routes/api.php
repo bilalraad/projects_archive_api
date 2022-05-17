@@ -48,4 +48,4 @@ Route::delete('/backups/destroy', [BackupController::class, 'destroy']);
 
 //teacher and graduates
 Route::get('/teachers', [GraduatesAndTeachersController::class, 'teachers']);
-Route::get('/graduates', [GraduatesAndTeachersController::class, 'graduates']);
+// Route::get('/graduates', [GraduatesAndTeachersController::class, 'graduates']);

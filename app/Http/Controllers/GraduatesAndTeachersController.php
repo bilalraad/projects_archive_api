@@ -23,26 +23,26 @@ class GraduatesAndTeachersController extends Controller
     }
 
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function graduates(Request $request)
-    {
-        $graduates = Graduate::select('*')->where(function ($q) use ($request) {
-            if ($request->has('level'))
-                $q->where('level', '=', $request->level);
-        });
+    // /**
+    //  * Display a listing of the resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function graduates(Request $request)
+    // {
+    //     $graduates = Graduate::select('*')->where(function ($q) use ($request) {
+    //         if ($request->has('level'))
+    //             $q->where('level', '=', $request->level);
+    //     });
 
-        $count = $graduates->count();
-        $graduates = $graduates->get();
+    //     $count = $graduates->count();
+    //     $graduates = $graduates->get();
 
-        return [
-            'count' => $count,
-            'results' => $graduates,
-        ];
-    }
+    //     return [
+    //         'count' => $count,
+    //         'results' => $graduates,
+    //     ];
+    // }
     public function teachers()
     {
         $teachers = Teacher::select('*');

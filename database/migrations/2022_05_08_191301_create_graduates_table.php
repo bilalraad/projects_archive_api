@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+// ! NOTE: THIS TABLE IS NO LONGER BEING USED
 
 class CreateGraduatesTable extends Migration
 {

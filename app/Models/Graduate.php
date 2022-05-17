@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+// ! NOTE: THIS MODEL IS NO LONGER BEING USED
 class Graduate extends Model
 {
     use HasFactory;

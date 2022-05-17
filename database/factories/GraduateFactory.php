@@ -1,4 +1,5 @@
 <?php
+//! NOTE: THIS FACTORY IS NO LONGER BEING USED
 
 namespace Database\Factories;
 
