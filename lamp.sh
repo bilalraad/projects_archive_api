@@ -49,6 +49,9 @@ systemctl start mariadb
 mysql_secure_installation
 systemctl enable mariadb.service
 
+sudo yum install epel-release yum-utils
+sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum-config-manager --enable remi-php8
 yum install -y php php-mysql
 systemctl restart httpd.service
 
