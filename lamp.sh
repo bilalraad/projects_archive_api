@@ -51,8 +51,8 @@ systemctl enable mariadb.service
 
 sudo yum install epel-release yum-utils
 sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-yum-config-manager --enable remi-php8
-yum install -y php php-mysql
+yum-config-manager --enable remi-php80
+yum install -y php php-{mysql,cli,fpm,mysqlnd,zip,devel,gd,mbstring,curl,xml,pear,bcmath,json}
 systemctl restart httpd.service
 
 firewall-cmd --permanent --zone=public --add-service=http

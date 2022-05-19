@@ -25,4 +25,4 @@ sudo chmod 777 .env
 php artisan application:install
 
 # Install node dependency
-npm install
+# npm install
