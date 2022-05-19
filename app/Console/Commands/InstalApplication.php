@@ -55,8 +55,8 @@ class InstallApplication extends Command
      */
     private function createDatabase()
     {
-        if ($this->testDbConnection()) {
-            return;
+        if (!$this->testDbConnection()) {
+            // return;
         }
 
         $this->line("You need to choose a database type.");
