@@ -11,6 +11,8 @@ php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 sudo mv composer.phar /usr/local/bin/composer
 
 
+
+
 # Install Composer Dependency
 /usr/local/bin/composer install
 

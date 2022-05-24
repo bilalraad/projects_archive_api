@@ -49,6 +49,11 @@ systemctl start mariadb
 mysql_secure_installation
 systemctl enable mariadb.service
 
+
+echo "Creating DB"
+
+sh ./createDB.sh
+
 sudo yum install epel-release yum-utils
 sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 yum-config-manager --enable remi-php80
@@ -91,4 +96,7 @@ yum install -y mod_passenger
 
 systemctl restart httpd
 
-echo '>> Done! >>'
+echo "Running laravel"
+
+sh ./installer.sh
+

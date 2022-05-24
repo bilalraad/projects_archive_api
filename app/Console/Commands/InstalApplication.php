@@ -63,6 +63,7 @@ class InstallApplication extends Command
 
         install_database:
 
+
         $connection = 'mysql';
         $host = null;
         $port = null;
@@ -77,7 +78,7 @@ class InstallApplication extends Command
         $host = $this->ask('Database host', 'localhost');
         $port = $this->ask('Database port', $defaultPort);
         $database = $this->ask('Database name', "projects_archive_api");
-        $username = $this->ask('Database username', 'root');
+        $username = $this->ask('Database username', 'project_archive_api');
         $password = $this->secret('Database password', '');
         $database2 = $this->ask('Teachers database Name');
 
