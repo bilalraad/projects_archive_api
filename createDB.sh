@@ -14,11 +14,11 @@ fi
 echo "enter root paswword"
 read -sp rootpass
 
-mysql -u root -p$rootpass -e "SELECT host, user FROM mysql.user;"
-mysql -u root -p$rootpass -e "DROP USER '${MAINUSER}'@localhost;"
-mysql -u root -p$rootpass -e "FLUSH PRIVILEGES;"
-mysql -u root -p$rootpass -e "CREATE USER ${MAINUSER}@localhost IDENTIFIED BY '${PASSWDDB}';"
-mysql -u root -p$rootpass -e "GRANT ALL PRIVILEGES ON ${MAINDB}.* TO '${MAINUSER}'@'localhost';"
-mysql -u root -p$rootpass -e "FLUSH PRIVILEGES;"
+mysql -u root -p "${rootpass}" -e "SELECT host, user FROM mysql.user;"
+mysql -u root -p "${rootpass}" -e "DROP USER '${MAINUSER}'@localhost;"
+mysql -u root -p "${rootpass}" -e "FLUSH PRIVILEGES;"
+mysql -u root -p "${rootpass}" -e "CREATE USER ${MAINUSER}@localhost IDENTIFIED BY '${PASSWDDB}';"
+mysql -u root -p "${rootpass}" -e "GRANT ALL PRIVILEGES ON ${MAINDB}.* TO '${MAINUSER}'@'localhost';"
+mysql -u root -p "${rootpass}" -e "FLUSH PRIVILEGES;"
 
 
