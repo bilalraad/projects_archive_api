@@ -13,9 +13,9 @@ class CreateTeachersTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql2')->dropIfExists('teachers');
+        Schema::connection('mysql2')->dropIfExists('instructors');
 
-        Schema::connection('mysql2')->create('teachers', function (Blueprint $table) {
+        Schema::connection('mysql2')->create('instructors', function (Blueprint $table) {
             $table->id();
             $table->string('name_ar');
             $table->string('name_en')->nullable();
@@ -34,6 +34,6 @@ class CreateTeachersTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql2')->dropIfExists('teachers');
+        Schema::connection('mysql2')->dropIfExists('instructors');
     }
 }
