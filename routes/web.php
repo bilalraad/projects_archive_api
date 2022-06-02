@@ -19,6 +19,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-// Route::get('/', function () {
-//     return view('flutter', ['flutterview' => File::get(public_path() . '/web/index.html')]);
-// });
+Route::get('/', function () {
+    return redirect('/web/index.html');
+});
