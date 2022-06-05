@@ -10,5 +10,5 @@ class Teacher extends Model
     use HasFactory;
 
     protected $connection = "mysql2";
-    protected $table = "teachers";
+    protected $table = "instructors";
 }
