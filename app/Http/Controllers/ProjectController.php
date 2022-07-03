@@ -10,8 +10,8 @@ use App\Models\Project;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\ProjectsExports;
 use App\Imports\ProjectsImport;
-
-
+use App\Models\File;
+use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
@@ -100,9 +100,8 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, project $project)
     {
-        $project = Project::find($id);
 
         $data = $request->validate(
             Project::UpdateRules(),

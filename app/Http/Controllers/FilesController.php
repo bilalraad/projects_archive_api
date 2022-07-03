@@ -22,21 +22,20 @@ class FilesController extends Controller
     }
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'files' => ["required", "array", "max:2"],
-            'files.*' => 'mimes:doc,docx,pdf,vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'project_id' => 'required',
-        ]);
+        try {
+            $data = $request->validate([
+                'files' => ["required", "array", "max:2"],
+                'files.*' => 'mimes:doc,docx,pdf,zip,application/octet-stream,application/x-zip-compressed,multipart/x-zip|max:10000',
+                'project_id' => 'required',
+            ]);
+        } catch (\Throwable $th) {
+            info($th);
+            return response('الملف كبير جدا الحد الاعلى هو 10MB', 413);
+        }
+
         $files = $data['files'];
         foreach ($files as $file) {
-            $path = Storage::putFile('files/' . $data["project_id"], $file);
-            $name = $file->getClientOriginalName();
-            $save = new File();
-            $save->title = $name;
-            $save->path = $path;
-            $save->project_id = $data["project_id"];
-
-            $save->save();
+            File::create($file, $data["project_id"]);
         };
         return response()->json([
             "message" => "تم رفع الملفات بنجاح",

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
 
 class File extends Model
 {
@@ -12,6 +14,18 @@ class File extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public static function create($file, $project_id)
+    {
+        $path = Storage::putFile('files/' . $project_id, $file);
+        $name = $file->getClientOriginalName();
+        $save = new File();
+        $save->title = $name;
+        $save->path = $path;
+        $save->project_id = $project_id;
+
+        $save->save();
     }
 
     /**
