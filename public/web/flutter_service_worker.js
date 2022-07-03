@@ -4,10 +4,10 @@ const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "version.json": "92c47db41f7e701f9ba69a4ff63546de",
-"index.html": "7c2ac15edb96cbdcc92f27c1b0c237da",
-"/": "7c2ac15edb96cbdcc92f27c1b0c237da",
-"main.dart.js": "31aa60a987d40a296c2330e778282c86",
-"flutter.js": "0816e65a103ba8ba51b174eeeeb2cb67",
+"index.html": "6ee672bf8b125c795f8837115731b4b8",
+"/": "6ee672bf8b125c795f8837115731b4b8",
+"main.dart.js": "ad71969d7e5f52bd16e55ead69a1ac21",
+"flutter.js": "eb2682e33f25cd8f1fc59011497c35f8",
 "logo.png": "0dbe9c44a852b5de991e12bb465c8818",
 "icons/android-chrome-192x192.png": "ae6c1f1697454b4ccf0810805270afd7",
 "icons/apple-touch-icon.png": "0f6b30e06853fd0b7cc185a973ba9ea0",
@@ -21,7 +21,7 @@ const RESOURCES = {
 "assets/assets/images/logo.webp": "f361b2ca14308c5aea495479d950827d",
 "assets/assets/images/zip.webp": "3eda7a6af0f26fad77a4cbd7a8714366",
 "assets/assets/images/college_logo.webp": "fb361d337b4ce697716bd8bff2ddb917",
-"assets/assets/mobile.env": "a83eb6d7a0fd76df85af1af8279fcab1",
+"assets/assets/mobile.env": "654dc336260a409835440d34678ed97f",
 "assets/assets/fonts/NotoKufiArabic.ttf": "79a4e2fd3719eed0f050a144ce6f3b72",
 "canvaskit/canvaskit.js": "c2b4e5f3d7a3d82aed024e7249a78487",
 "canvaskit/profiling/canvaskit.js": "ae2949af4efc61d28a4a80fffa1db900",
